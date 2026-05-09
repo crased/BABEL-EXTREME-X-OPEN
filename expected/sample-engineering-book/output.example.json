@@ -1,0 +1,117 @@
+{
+  "source_file": "sample-engineering-book.pdf",
+  "source_lang_detected": "ru",
+  "target_lang": null,
+  "pages": [
+    {
+      "page_number": 12,
+      "width": 2480,
+      "height": 3508,
+      "dpi_estimated": 300,
+      "elements": [
+        {
+          "id": "el_12_001",
+          "type": "header",
+          "bbox": {"x1": 220, "y1": 110, "x2": 2260, "y2": 170},
+          "content": "Глава 2. Конструкция боевой машины",
+          "confidence": 0.94,
+          "needs_review": false
+        },
+        {
+          "id": "el_12_002",
+          "type": "heading",
+          "bbox": {"x1": 220, "y1": 240, "x2": 1900, "y2": 320},
+          "content": "2.1 Общие сведения",
+          "confidence": 0.97,
+          "needs_review": false
+        },
+        {
+          "id": "el_12_003",
+          "type": "text_block",
+          "bbox": {"x1": 220, "y1": 360, "x2": 2260, "y2": 1080},
+          "content": "Боевая машина представляет собой самоходную пусковую установку...",
+          "confidence": 0.91,
+          "needs_review": false
+        },
+        {
+          "id": "el_12_004",
+          "type": "figure",
+          "bbox": {"x1": 220, "y1": 1130, "x2": 1620, "y2": 2100},
+          "content": "",
+          "confidence": 0.99,
+          "needs_review": false,
+          "figure_path": "figures/page_12_fig_1.png"
+        },
+        {
+          "id": "el_12_005",
+          "type": "caption",
+          "bbox": {"x1": 220, "y1": 2120, "x2": 1620, "y2": 2180},
+          "content": "Рис. 2.1. Общий вид боевой машины БМ-21",
+          "confidence": 0.88,
+          "needs_review": false
+        },
+        {
+          "id": "el_12_006",
+          "type": "table",
+          "bbox": {"x1": 1700, "y1": 1130, "x2": 2260, "y2": 2100},
+          "content": "",
+          "confidence": 0.79,
+          "needs_review": true,
+          "table": {
+            "rows": 4,
+            "cols": 2,
+            "cells": [
+              {"row": 0, "col": 0, "row_span": 1, "col_span": 1, "content": "Параметр", "is_header": true},
+              {"row": 0, "col": 1, "row_span": 1, "col_span": 1, "content": "Значение", "is_header": true},
+              {"row": 1, "col": 0, "row_span": 1, "col_span": 1, "content": "Калибр", "is_header": false},
+              {"row": 1, "col": 1, "row_span": 1, "col_span": 1, "content": "122 мм", "is_header": false},
+              {"row": 2, "col": 0, "row_span": 1, "col_span": 1, "content": "Дальность", "is_header": false},
+              {"row": 2, "col": 1, "row_span": 1, "col_span": 1, "content": "20 км", "is_header": false},
+              {"row": 3, "col": 0, "row_span": 1, "col_span": 1, "content": "", "is_header": false},
+              {"row": 3, "col": 1, "row_span": 1, "col_span": 1, "content": "", "is_header": false}
+            ]
+          }
+        },
+        {
+          "id": "el_12_007",
+          "type": "formula",
+          "bbox": {"x1": 220, "y1": 2240, "x2": 900, "y2": 2330},
+          "content": "v = \\sqrt{2 g h}",
+          "confidence": 0.82,
+          "needs_review": false
+        },
+        {
+          "id": "el_12_008",
+          "type": "text_block",
+          "bbox": {"x1": 220, "y1": 2360, "x2": 2260, "y2": 3300},
+          "content": "где v — начальная скорость снаряда, g — ускорение свободного падения...",
+          "confidence": 0.89,
+          "needs_review": false
+        },
+        {
+          "id": "el_12_009",
+          "type": "footer",
+          "bbox": {"x1": 220, "y1": 3360, "x2": 2260, "y2": 3450},
+          "content": "12",
+          "confidence": 0.96,
+          "needs_review": false
+        }
+      ],
+      "reading_order": [
+        "el_12_001",
+        "el_12_002",
+        "el_12_003",
+        "el_12_004",
+        "el_12_005",
+        "el_12_006",
+        "el_12_007",
+        "el_12_008",
+        "el_12_009"
+      ]
+    }
+  ],
+  "extraction_notes": [
+    "Stage-1 deskew applied (avg 0.6° across processed pages).",
+    "1 element flagged for review on page 12: table el_12_006 had ambiguous row count due to faint horizontal rule; row 4 left empty pending review."
+  ]
+}

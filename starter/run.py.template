@@ -1,0 +1,98 @@
+"""
+Starter skeleton for the Babel-Extreme apprentice assignment.
+
+This is a *template* — fill in the body of `process()` and `reconstruct()`.
+Architecture is yours; this file does not constrain it. Delete this template
+once you have your own package layout.
+
+Usage (after you implement it):
+    python -m yourpackage path/to/input.pdf -o outputs/
+
+Or, while still in starter form:
+    python starter/run.py.template inputs/sample-engineering-book.pdf -o outputs/
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+from typing import Any
+
+
+def process(input_path: Path) -> dict[str, Any]:
+    """
+    Run extraction on a single input (PDF or image) and return a dict that
+    conforms to OUTPUT_CONTRACT.md / schema.json.
+
+    You decide:
+    - PDF vs image handling
+    - OCR engine
+    - layout detection
+    - table extraction
+    - confidence aggregation
+
+    The shape below is the bare-minimum schema-valid skeleton so the file can
+    be imported. Replace it.
+    """
+    return {
+        "source_file": input_path.name,
+        "source_lang_detected": None,
+        "target_lang": None,
+        "pages": [
+            {
+                "page_number": 1,
+                "width": 1,
+                "height": 1,
+                "dpi_estimated": None,
+                "elements": [],
+                "reading_order": [],
+            }
+        ],
+        "extraction_notes": ["TODO: replace this stub with a real implementation."],
+    }
+
+
+def reconstruct(structured: dict[str, Any], out_html: Path) -> None:
+    """
+    Render an HTML view of `structured` that preserves region positions.
+
+    You decide:
+    - layout strategy (absolute-positioned divs, CSS grid, etc.)
+    - whether to embed the original page image as a backdrop
+    - typography handling
+    """
+    out_html.parent.mkdir(parents=True, exist_ok=True)
+    out_html.write_text(
+        "<!doctype html><meta charset=utf-8><title>TODO</title>"
+        "<p>Replace this stub with a real reconstruction.</p>",
+        encoding="utf-8",
+    )
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Babel-Extreme apprentice — starter skeleton.")
+    parser.add_argument("input", help="Path to input PDF or image.")
+    parser.add_argument("-o", "--output-dir", default="outputs", help="Where to write outputs.")
+    args = parser.parse_args(argv)
+
+    in_path = Path(args.input).resolve()
+    if not in_path.exists():
+        parser.error(f"input not found: {in_path}")
+
+    out_root = Path(args.output_dir).resolve() / in_path.stem
+    out_root.mkdir(parents=True, exist_ok=True)
+
+    structured = process(in_path)
+    (out_root / "output.json").write_text(
+        json.dumps(structured, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    reconstruct(structured, out_root / "reconstructed.html")
+    print(f"wrote {out_root / 'output.json'}")
+    print(f"wrote {out_root / 'reconstructed.html'}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
