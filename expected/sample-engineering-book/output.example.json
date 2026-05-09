@@ -58,17 +58,18 @@
           "confidence": 0.79,
           "needs_review": true,
           "table": {
-            "rows": 4,
+            "rows": 5,
             "cols": 2,
             "cells": [
-              {"row": 0, "col": 0, "row_span": 1, "col_span": 1, "content": "Параметр", "is_header": true},
-              {"row": 0, "col": 1, "row_span": 1, "col_span": 1, "content": "Значение", "is_header": true},
-              {"row": 1, "col": 0, "row_span": 1, "col_span": 1, "content": "Калибр", "is_header": false},
-              {"row": 1, "col": 1, "row_span": 1, "col_span": 1, "content": "122 мм", "is_header": false},
-              {"row": 2, "col": 0, "row_span": 1, "col_span": 1, "content": "Дальность", "is_header": false},
-              {"row": 2, "col": 1, "row_span": 1, "col_span": 1, "content": "20 км", "is_header": false},
-              {"row": 3, "col": 0, "row_span": 1, "col_span": 1, "content": "", "is_header": false},
-              {"row": 3, "col": 1, "row_span": 1, "col_span": 1, "content": "", "is_header": false}
+              {"row": 0, "col": 0, "row_span": 1, "col_span": 2, "content": "Тактико-технические характеристики", "is_header": true},
+              {"row": 1, "col": 0, "row_span": 1, "col_span": 1, "content": "Параметр", "is_header": true},
+              {"row": 1, "col": 1, "row_span": 1, "col_span": 1, "content": "Значение", "is_header": true},
+              {"row": 2, "col": 0, "row_span": 1, "col_span": 1, "content": "Калибр", "is_header": false},
+              {"row": 2, "col": 1, "row_span": 1, "col_span": 1, "content": "122 мм", "is_header": false},
+              {"row": 3, "col": 0, "row_span": 1, "col_span": 1, "content": "Дальность", "is_header": false},
+              {"row": 3, "col": 1, "row_span": 1, "col_span": 1, "content": "20 км", "is_header": false},
+              {"row": 4, "col": 0, "row_span": 1, "col_span": 1, "content": "", "is_header": false},
+              {"row": 4, "col": 1, "row_span": 1, "col_span": 1, "content": "", "is_header": false}
             ]
           }
         },

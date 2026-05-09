@@ -1,36 +1,41 @@
-# Babel-Extreme Apprentice Assignment
+# Babel-Extreme
 
-A take-home for apprentice-tier AI engineering candidates. The task: turn an
-image-only scanned PDF into a structured JSON document with bounding boxes,
-plus a reconstructed HTML view. Translation is a stretch goal.
+Pipeline for converting image-only scanned engineering documents into structured JSON plus an HTML reconstruction that preserves the page's spatial intent. Translation to a target language is a planned extension; see [`docs/`](docs/) for design notes.
 
-## Read in this order
+## Status
 
-1. [`BRIEF.md`](BRIEF.md) — what we want, what we test, what's out of scope.
-2. [`OUTPUT_CONTRACT.md`](OUTPUT_CONTRACT.md) — the JSON shape your pipeline must emit.
-3. [`schema.json`](schema.json) — machine-validatable version of the contract.
-4. [`RUBRIC.md`](RUBRIC.md) — how we score.
-5. [`WRITE_UP_TEMPLATE.md`](WRITE_UP_TEMPLATE.md) — required sections in your submission.
-6. [`CONFIDENTIALITY.md`](CONFIDENTIALITY.md) — handling rules.
+Scaffold and design phase. The output schema, validation tooling, and a sample input are defined; the extraction and reconstruction code is not yet implemented.
 
-## Inputs and references
+## What it does (target behaviour)
 
-- [`inputs/`](inputs/) — bundled samples.
-- [`expected/`](expected/) — one worked output for shape reference (not an answer key).
-- [`reading-list.md`](reading-list.md) — flat list of tools and papers. Not a recommendation.
-- [`starter/`](starter/) — skeleton files and a non-prescriptive `requirements.txt.example`.
+Given a scanned PDF with no extractable text layer, Babel-Extreme aims to:
 
-## Pre-flight before submission
+1. Detect and classify each region on each page as `text_block`, `heading`, `caption`, `table`, `formula`, `figure`, `header`, `footer`, or `list_item`.
+2. Extract content — raw text for text-bearing regions, LaTeX for formulas, cropped image assets for figures.
+3. Recover row and column structure for tables, including merged cells.
+4. Emit a plausible reading order for multi-column pages.
+5. Produce a structured JSON document conforming to [`contracts/schema.json`](contracts/schema.json), plus an HTML reconstruction of each processed page.
 
-Run `python eval_runner.py outputs/` to validate your output JSONs against the
-schema and see your population stats. If this fails, your submission scores 0
-on schema validity.
+## Repository layout
 
-## Time budget
+| Path | What's there |
+|---|---|
+| [`contracts/schema.json`](contracts/schema.json) | JSON Schema for the output format — source of truth. |
+| [`docs/output-schema.md`](docs/output-schema.md) | Prose explanation of the schema with examples. |
+| [`docs/`](docs/) | System design notes — overview, per-stage notes, references, reading list. |
+| [`inputs/sample-engineering-book.pdf`](inputs/sample-engineering-book.pdf) | Bundled scanned engineering reference (Russian, multi-hundred pages, image-only). |
+| [`expected/sample-engineering-book/output.example.json`](expected/sample-engineering-book/output.example.json) | Worked example illustrating the schema's shape (not ground truth). |
+| [`tools/eval_runner.py`](tools/eval_runner.py) | Schema validator and population-statistics utility. |
 
-~25–30 hours over 5–7 calendar days. Required deliverables fit ~20h; stretch
-goals soak the rest.
+## Validating an output
 
-## Submission
+```bash
+pip install jsonschema
+python tools/eval_runner.py path/to/outputs/
+```
 
-Private fork only. See [`CONFIDENTIALITY.md`](CONFIDENTIALITY.md).
+The runner walks the given directory, validates each `*.json` against `contracts/schema.json`, and prints population statistics — pages, elements, percentage of text-bearing elements with non-empty content, table-cell counts, figure-with-path counts, bbox issues, and reading-order misses.
+
+## Sample input
+
+[`inputs/sample-engineering-book.pdf`](inputs/sample-engineering-book.pdf) is image-only — no extractable text layer. It is several hundred pages of Russian-language engineering content with prose, tables, technical diagrams, and equations. The pipeline is not specialized to subject matter; treat it as scanned pages that need extraction.

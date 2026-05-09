@@ -2,11 +2,11 @@
 Pre-flight check for Babel-Extreme apprentice submissions.
 
 Usage:
-    python eval_runner.py outputs/
+    python tools/eval_runner.py outputs/
 
 Walks the given directory looking for any *.json file, validates each against
-schema.json, and prints population statistics. Exits non-zero if validation
-fails on any file.
+contracts/schema.json, and prints population statistics. Exits non-zero if
+validation fails on any file.
 
 Run this before submitting. If it fails, your submission will score 0 on
 schema validity per RUBRIC.md.
@@ -31,8 +31,8 @@ except ImportError:
     sys.exit(2)
 
 
-REPO_ROOT = Path(__file__).resolve().parent
-SCHEMA_PATH = REPO_ROOT / "schema.json"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+SCHEMA_PATH = REPO_ROOT / "contracts" / "schema.json"
 
 TEXT_BEARING = {
     "text_block", "heading", "caption", "formula",
@@ -150,13 +150,13 @@ def report(path: Path, ok: bool, errors: list[str], data: dict[str, Any] | None)
         else 0.0
     )
     if s["text_bearing_total"] >= 5 and floor_pct < 60.0:
-        print(f"  -> WARN: showcase floor is 60% on populated text-bearing elements; you are at {floor_pct:.0f}%.")
+        print(f"  -> WARN: 60% floor on populated text-bearing elements; you are at {floor_pct:.0f}%.")
     return ok
 
 
 def main(argv: list[str]) -> int:
     if len(argv) != 2:
-        print("usage: python eval_runner.py <output-file-or-dir>", file=sys.stderr)
+        print("usage: python tools/eval_runner.py <output-file-or-dir>", file=sys.stderr)
         return 2
 
     target = Path(argv[1]).resolve()

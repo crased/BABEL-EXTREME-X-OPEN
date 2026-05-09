@@ -92,4 +92,5 @@ We have not sorted, ranked, or annotated. Read them or don't.
 - https://azure.microsoft.com/en-us/products/ai-services/ai-document-intelligence
 
 (Hosted services are not banned. They cost money and may have data-handling
-implications. Read the terms.)
+implications. Read the terms — and see [`CONFIDENTIALITY.md`](CONFIDENTIALITY.md)
+for the rule of thumb on which API tiers are typically OK.)

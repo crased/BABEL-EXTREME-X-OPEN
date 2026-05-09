@@ -19,3 +19,17 @@ Thumbs.db
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.ipynb_checkpoints/
+
+# Models & ML weights
+models/
+checkpoints/
+*.pt
+*.bin
+*.safetensors
+.cache/
+huggingface/
+
+# Logs
+*.log
+logs/

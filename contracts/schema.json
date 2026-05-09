@@ -81,7 +81,12 @@
         },
         {
           "if": { "properties": { "type": { "const": "figure" } }, "required": ["type"] },
-          "then": { "required": ["figure_path"] }
+          "then": {
+            "required": ["figure_path"],
+            "properties": {
+              "figure_path": { "type": "string", "minLength": 1 }
+            }
+          }
         }
       ]
     },

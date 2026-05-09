@@ -1,34 +1,23 @@
-# Expected
+# Worked Example Output
 
-The single file in this folder, [`sample-engineering-book/output.example.json`](sample-engineering-book/output.example.json),
-is a **structure illustration** — not an answer key.
+[`sample-engineering-book/output.example.json`](sample-engineering-book/output.example.json) is a **structure illustration** showing the schema's shape in motion. It is not ground truth and not a complete extraction of any real page.
 
-## What you can take from it
+## What to take from it
 
-- The **shape** of the JSON your pipeline must produce.
-- How `bbox`, `reading_order`, `table.cells`, and `figure_path` interact.
-- An example of an honest `needs_review=true` element with a corresponding
-  note in `extraction_notes`.
+- The shape of the JSON the pipeline produces.
+- How `bbox`, `reading_order`, `table.cells` (including merged cells via `row_span`/`col_span`), and `figure_path` interact.
+- An example of an honest `needs_review=true` element with a corresponding note in `extraction_notes`.
 
-## What you should not take from it
+## What not to take from it
 
-- **The values.** Page numbers, IDs, content strings, confidences, and
-  bbox coordinates in the example are illustrative. Yours will be different
-  because your pipeline is different.
-- **The element count.** The example has a handful of elements per page so
-  it's readable. A real page has dozens. We will compare your output against
-  what is *actually* on each page, not against what's in the example.
-- **The page choice.** The example is a synthetic illustration, not a real
-  page from the bundled PDF.
+- **The values.** Page numbers, IDs, content strings, confidences, and bbox coordinates are illustrative.
+- **The element count.** A real page has dozens of elements; the example uses a handful for readability.
+- **The page choice.** The example is a synthetic illustration, not a real page from the bundled PDF.
 
-## How to validate your own output
-
-Once you have an `outputs/sample-engineering-book/output.json`, run:
+## Validating an output
 
 ```bash
-python eval_runner.py outputs/
+python tools/eval_runner.py outputs/
 ```
 
-That will validate against `schema.json` and print population statistics.
-This is the same script we run on submission; passing it locally is the
-floor for getting your work read.
+Validates each `*.json` against [`../contracts/schema.json`](../contracts/schema.json) and prints population statistics.
