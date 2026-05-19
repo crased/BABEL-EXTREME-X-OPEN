@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ source_lang or '' }}">
+<head>
+  <meta charset="utf-8">
+  <title>{{ source_file }} — page {{ page.page_number }}</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="meta">
+    <h1>{{ source_file }}</h1>
+    <nav>{% for n in page_numbers %}
+      <a href="page_{{ '%04d' % n }}.html"
+         {% if n == page.page_number %}class="current"{% endif %}>{{ n }}</a>
+    {% endfor %}</nav>
+    <p class="dims">page {{ page.page_number }} · {{ page.width }}×{{ page.height }}px @ {{ page.dpi_estimated or '?' }} dpi · {{ page.elements|length }} elements</p>
+  </header>
+
+  <div class="page" style="width: {{ page.width }}px; height: {{ page.height }}px;">
+    {% for eid in page.reading_order %}
+      {% set el = elements_by_id[eid] %}
+      <div class="element {{ el.type }}{% if el.needs_review %} needs-review{% endif %}"
+           style="left:{{ el.bbox.x1 }}px; top:{{ el.bbox.y1 }}px; width:{{ el.bbox.x2 - el.bbox.x1 }}px; height:{{ el.bbox.y2 - el.bbox.y1 }}px;"
+           title="{{ el.id }} · {{ el.type }} · conf {{ '%.2f' % el.confidence }}">
+        {% if el.type == 'figure' and el.figure_path %}
+          <img src="{{ el.figure_path }}" alt="">
+        {% else %}
+          <span class="content">{{ el.content }}</span>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
